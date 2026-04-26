@@ -11,11 +11,18 @@ class PrinterI(Demo.Printer):
     def printReverse(self, s, current=None):
         print(s[::-1])
 
-communicator = Ice.initialize(sys.argv) 
+class GreeterI(Demo.Greeter):
+    def greet(self, name, current=None):
+        print(f"Hello, {name}!")
+
+    def farewell(self, name, current=None):
+        print(f"Goodbye, {name}!")
+
+communicator = Ice.initialize(sys.argv)
 
 adapter = communicator.createObjectAdapterWithEndpoints("SimpleAdapter", "default -p 11000")
-object = PrinterI()
-adapter.add(object, communicator.stringToIdentity("SimplePrinter"))
+adapter.add(PrinterI(), communicator.stringToIdentity("SimplePrinter"))
+adapter.add(GreeterI(), communicator.stringToIdentity("SimpleGreeter"))
 adapter.activate()
 
 communicator.waitForShutdown()

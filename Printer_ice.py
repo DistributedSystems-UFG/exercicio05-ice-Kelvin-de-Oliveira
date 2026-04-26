@@ -116,4 +116,81 @@ if 'PrinterPrx' not in _M_Demo.__dict__:
     _M_Demo.Printer = Printer
     del Printer
 
+if 'GreeterPrx' not in _M_Demo.__dict__:
+    _M_Demo.GreeterPrx = Ice.createTempClass()
+    class GreeterPrx(Ice.ObjectPrx):
+
+        def greet(self, name, context=None):
+            return _M_Demo.Greeter._op_greet.invoke(self, ((name, ), context))
+
+        def greetAsync(self, name, context=None):
+            return _M_Demo.Greeter._op_greet.invokeAsync(self, ((name, ), context))
+
+        def begin_greet(self, name, _response=None, _ex=None, _sent=None, context=None):
+            return _M_Demo.Greeter._op_greet.begin(self, ((name, ), _response, _ex, _sent, context))
+
+        def end_greet(self, _r):
+            return _M_Demo.Greeter._op_greet.end(self, _r)
+
+        def farewell(self, name, context=None):
+            return _M_Demo.Greeter._op_farewell.invoke(self, ((name, ), context))
+
+        def farewellAsync(self, name, context=None):
+            return _M_Demo.Greeter._op_farewell.invokeAsync(self, ((name, ), context))
+
+        def begin_farewell(self, name, _response=None, _ex=None, _sent=None, context=None):
+            return _M_Demo.Greeter._op_farewell.begin(self, ((name, ), _response, _ex, _sent, context))
+
+        def end_farewell(self, _r):
+            return _M_Demo.Greeter._op_farewell.end(self, _r)
+
+        @staticmethod
+        def checkedCast(proxy, facetOrContext=None, context=None):
+            return _M_Demo.GreeterPrx.ice_checkedCast(proxy, '::Demo::Greeter', facetOrContext, context)
+
+        @staticmethod
+        def uncheckedCast(proxy, facet=None):
+            return _M_Demo.GreeterPrx.ice_uncheckedCast(proxy, facet)
+
+        @staticmethod
+        def ice_staticId():
+            return '::Demo::Greeter'
+    _M_Demo._t_GreeterPrx = IcePy.defineProxy('::Demo::Greeter', GreeterPrx)
+
+    _M_Demo.GreeterPrx = GreeterPrx
+    del GreeterPrx
+
+    _M_Demo.Greeter = Ice.createTempClass()
+    class Greeter(Ice.Object):
+
+        def ice_ids(self, current=None):
+            return ('::Demo::Greeter', '::Ice::Object')
+
+        def ice_id(self, current=None):
+            return '::Demo::Greeter'
+
+        @staticmethod
+        def ice_staticId():
+            return '::Demo::Greeter'
+
+        def greet(self, name, current=None):
+            raise NotImplementedError("servant method 'greet' not implemented")
+
+        def farewell(self, name, current=None):
+            raise NotImplementedError("servant method 'farewell' not implemented")
+
+        def __str__(self):
+            return IcePy.stringify(self, _M_Demo._t_GreeterDisp)
+
+        __repr__ = __str__
+
+    _M_Demo._t_GreeterDisp = IcePy.defineClass('::Demo::Greeter', Greeter, (), None, ())
+    Greeter._ice_type = _M_Demo._t_GreeterDisp
+
+    Greeter._op_greet = IcePy.Operation('greet', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), IcePy._t_string, False, 0),), (), None, ())
+    Greeter._op_farewell = IcePy.Operation('farewell', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), IcePy._t_string, False, 0),), (), None, ())
+
+    _M_Demo.Greeter = Greeter
+    del Greeter
+
 # End of module Demo

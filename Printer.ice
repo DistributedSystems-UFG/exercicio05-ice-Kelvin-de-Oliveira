@@ -6,4 +6,10 @@ module Demo
         void printUpperCase(string s);
         void printReverse(string s);
     }
+
+    interface Greeter
+    {
+        void greet(string name);
+        void farewell(string name);
+    }
 }
